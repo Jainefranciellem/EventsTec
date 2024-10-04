@@ -4,6 +4,8 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface Address extends JpaRepository<Address, UUID> {
+import com.eventostec.api.domain.address.Address;
+
+public interface AddressRepository extends JpaRepository<Address, UUID> {
     
 }
