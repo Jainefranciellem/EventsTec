@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.eventostec.api.domain.coupon.Coupon;
 import com.eventostec.api.domain.coupon.CouponRequestDTO;
@@ -11,6 +12,7 @@ import com.eventostec.api.domain.event.Event;
 import com.eventostec.api.repositories.CouponRepository;
 import com.eventostec.api.repositories.EventRepository;
 
+@Service
 public class CouponService {
 
     @Autowired
@@ -19,6 +21,7 @@ public class CouponService {
     @Autowired
     private EventRepository eventRepository;
 
+    
     public Coupon addCouponToEvent(UUID eventID, CouponRequestDTO data) {
         Event event = eventRepository.findById(eventID).orElseThrow(() -> new IllegalArgumentException("Event not found"));
 
@@ -31,5 +34,4 @@ public class CouponService {
         couponRepository.save(coupon);
         return coupon;
     }
-
 }
