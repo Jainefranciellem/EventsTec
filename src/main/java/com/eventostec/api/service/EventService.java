@@ -20,6 +20,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.eventostec.api.domain.event.Event;
 import com.eventostec.api.domain.event.EventRequestDTO;
 import com.eventostec.api.domain.event.EventResponseDTO;
+import com.eventostec.api.repositories.AddressRepository;
 import com.eventostec.api.repositories.EventRepository;
 
 @Service
@@ -33,6 +34,7 @@ public class EventService {
 
     @Autowired
     private EventRepository eventRepository;
+    private AddressService addressService;
 
 
 
@@ -52,6 +54,10 @@ public class EventService {
         newEvent.setRemote(data.remote());
 
         eventRepository.save(newEvent);
+
+        if (!data.remote()) {
+            this.addressService.createAddress(data, newEvent);
+        }
         return newEvent;
     }
 
